@@ -28,7 +28,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center opacity-45"
         style={{
-          backgroundImage: "url('/nebula-veil.jpg')",
+          backgroundImage: `url(${import.meta.env.BASE_URL}nebula-veil.jpg)`,
           transform: `translate3d(${tilt.x * -10}px, ${tilt.y * -10}px, 0) scale(1.1)`,
         }}
       />

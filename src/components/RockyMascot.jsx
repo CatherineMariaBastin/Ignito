@@ -30,7 +30,11 @@ export default function RockyMascot() {
         aria-label="Tap Rocky for a mission update"
         className="w-16 h-16 rounded-full overflow-hidden border-2 border-nebula-green/60 shadow-[0_0_30px_rgba(57,255,176,0.4)] hover:scale-110 active:scale-95 transition-transform animate-float"
       >
-        <img src="/rocky.jpg" alt="Rocky mascot" className="w-full h-full object-cover" />
+        <img
+          src={`${import.meta.env.BASE_URL}rocky.jpg`}
+          alt="Rocky mascot"
+          className="w-full h-full object-cover"
+        />
       </button>
     </div>
   )
