@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import StarfieldCanvas from './components/StarfieldCanvas'
 import CustomCursor from './components/CustomCursor'
 import RockyMascot from './components/RockyMascot'
+import MusicPlayer from './components/MusicPlayer'
 
 export default function App() {
   return (
@@ -18,6 +19,9 @@ export default function App() {
       
       {/* Custom operational cursor tracker */}
       <CustomCursor />
+      
+      {/* Persistent background music + speaker toggle */}
+      <MusicPlayer />
       
       <Navbar />
       

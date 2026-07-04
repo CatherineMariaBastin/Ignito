@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { Sun, Moon, Telescope, Star, Sparkles, Navigation, Award, Volume2, VolumeX, ShieldAlert, Zap, Orbit, RefreshCw, Eye } from "lucide-react";
+import { Sun, Moon, Navigation, Volume2, VolumeX, Orbit, RefreshCw } from "lucide-react";
 import useReveal from "../hooks/useReveal";
 
 export default function CelestialSpecials() {
   const ref = useReveal();
 
-  // State: 'sun' (Solar Meridian), 'night' (Lunar Alignment), 'eclipse' (Celestial Corona)
+  // State: 'sun' (Solar Meridian), 'night' (Lunar Alignment)
   const [celestialMode, setCelestialMode] = useState("sun");
 
   // Orbit slider state: 0 (Sunrise) -> 50 (High Solar Noon) -> 75 (Sunset/Twilight) -> 100 (Deep Obsidian Night)
@@ -14,11 +14,7 @@ export default function CelestialSpecials() {
 
   // Extra interactive states
   const [stars, setStars] = useState([]);
-  const [isIgnited, setIsIgnited] = useState(false);
-  const [solarIntensity, setSolarIntensity] = useState(65);
-  const [telescopeFocus, setTelescopeFocus] = useState(15); // Focused at 100%
   const [soundEnabled, setSoundEnabled] = useState(false);
-  const [activeConstellation, setActiveConstellation] = useState(null);
 
   const autoOrbitRef = useRef(null);
 
@@ -104,33 +100,6 @@ export default function CelestialSpecials() {
     setSoundEnabled(newState);
     if (newState) {
       setTimeout(() => playBeep(523.25, 0.4, "sine"), 50); // Sound feedback
-    }
-  };
-
-  // Trigger brief simulation of main stage ignition
-  const handleIgnition = () => {
-    setIsIgnited(true);
-    playBeep(220, 0.6, "sawtooth");
-    playBeep(440, 0.3, "triangle");
-    setTimeout(() => {
-      setIsIgnited(false);
-    }, 2500);
-  };
-
-  // Telescope auto focus helper
-  const handleTelescopeFocusChange = (val) => {
-    setTelescopeFocus(val);
-    if (val === 100) {
-      playBeep(880, 0.4, "sine");
-      setActiveConstellation("Ursa Major (The Great Bear)");
-    } else if (val === 50) {
-      playBeep(659.25, 0.2, "sine");
-      setActiveConstellation("Orion (The Hunter)");
-    } else if (val === 10) {
-      playBeep(523.25, 0.2, "sine");
-      setActiveConstellation("Cassiopeia (The Queen)");
-    } else {
-      setActiveConstellation(null);
     }
   };
 
@@ -237,8 +206,8 @@ export default function CelestialSpecials() {
           style={{
             left: `${getSunPosition().x - 15}%`,
             top: `${getSunPosition().y - 15}%`,
-            width: `${180 + solarIntensity * 1.5}px`,
-            height: `${180 + solarIntensity * 1.5}px`,
+            width: "277.5px",
+            height: "277.5px",
             opacity: getSunPosition().opacity * 0.45,
             background: "radial-gradient(circle, rgba(251,191,36,0.5) 0%, rgba(245,158,11,0.2) 50%, rgba(234,88,12,0) 100%)"
           }}
@@ -499,7 +468,7 @@ export default function CelestialSpecials() {
             SECTION 03 · THE CELESTIAL AXIS
           </p>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight leading-tight transition-colors duration-1000">
-            {orbitProgress <= 75 ? (
+            {orbitProgress < 75 ? (
               <>
                 The Sun <span className="text-gradient-sun drop-shadow-[0_0_15px_rgba(251,191,36,0.25)]">Opens It.</span>
               </>
@@ -510,7 +479,7 @@ export default function CelestialSpecials() {
             )}
           </h2>
           <p className="mt-4 text-sm font-mono text-starlight/50 max-w-md mx-auto">
-            {orbitProgress <= 75 
+            {orbitProgress < 75 
               ? "The high-energy ignition, fireside talks, and challenges of the first orbit."
               : "Telescope-assisted stargazing, award sets, and rooftop observatory winds."}
           </p>
@@ -522,8 +491,8 @@ export default function CelestialSpecials() {
           {/* SUN CARD (IGNITION DAY) */}
           <article 
             id="sun-card"
-            style={{ display: orbitProgress <= 75 ? "block" : "none" }}
-            className="reveal w-full relative overflow-hidden rounded-[32px] p-9 sm:p-12 transition-all duration-750 glass-panel shine-effect sun-card-hover border-star-amber/60 shadow-[0_0_50px_rgba(245,158,11,0.25)] ring-1 ring-star-yellow/30"
+            style={{ display: orbitProgress < 75 ? "block" : "none" }}
+            className="w-full relative overflow-hidden rounded-[32px] p-9 sm:p-12 transition-all duration-750 glass-panel shine-effect sun-card-hover border-star-amber/60 shadow-[0_0_50px_rgba(245,158,11,0.25)] ring-1 ring-star-yellow/30"
           >
             {/* Spinning sun rays background visual element, highly dynamic */}
             <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-gradient-to-br from-star-yellow to-star-orange blur-3xl opacity-40 animate-pulse-glow" />
@@ -565,61 +534,14 @@ export default function CelestialSpecials() {
                 </li>
               </ul>
 
-              {/* Interactive Widget inside Sun Card */}
-              <div className="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-star-yellow" />
-                    <span className="text-xs font-mono uppercase tracking-wider text-starlight/75">Ignition Flare Console</span>
-                  </div>
-                  {isIgnited && (
-                    <span className="text-[10px] font-mono text-star-yellow bg-star-yellow/10 px-2 py-0.5 rounded-full animate-pulse">
-                      STAGE BURNING
-                    </span>
-                  )}
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs font-mono text-starlight/50">
-                    <span>Solar Ray Flux</span>
-                    <span>{solarIntensity}% Intensity</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="10" 
-                    max="100" 
-                    value={solarIntensity}
-                    onChange={(e) => {
-                      setSolarIntensity(Number(e.target.value));
-                      if (Number(e.target.value) % 15 === 0) playBeep(220 + Number(e.target.value) * 3, 0.1, "sine");
-                    }}
-                    className="w-full cursor-pointer accent-star-yellow"
-                    id="solar-flux-slider"
-                  />
-                  
-                  <button
-                    id="ignite-button"
-                    onClick={handleIgnition}
-                    disabled={isIgnited}
-                    className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono uppercase font-bold tracking-widest transition-all duration-300 ${
-                      isIgnited 
-                        ? "bg-star-yellow/20 text-star-yellow border border-star-yellow/40 animate-pulse"
-                        : "bg-gradient-to-r from-star-yellow to-star-orange text-slate-950 hover:shadow-[0_0_20px_rgba(245,158,11,0.5)] transform hover:-translate-y-0.5 cursor-pointer"
-                    }`}
-                  >
-                    {isIgnited ? "✧ Stage System Ignited ✧" : "☉ Press to Ignite Main Stage"}
-                  </button>
-                </div>
-              </div>
-
             </div>
           </article>
 
           {/* MOON CARD (ECLIPSE NIGHT) */}
           <article 
             id="moon-card"
-            style={{ display: orbitProgress > 75 ? "block" : "none" }}
-            className="reveal w-full relative overflow-hidden rounded-[32px] p-9 sm:p-12 transition-all duration-750 glass-panel shine-effect moon-card-hover border-nebula-blue/60 shadow-[0_0_50px_rgba(56,189,248,0.25)] ring-1 ring-nebula-blue/30"
+            style={{ display: orbitProgress >= 75 ? "block" : "none" }}
+            className="w-full relative overflow-hidden rounded-[32px] p-9 sm:p-12 transition-all duration-750 glass-panel shine-effect moon-card-hover border-nebula-blue/60 shadow-[0_0_50px_rgba(56,189,248,0.25)] ring-1 ring-nebula-blue/30"
           >
             {/* Spinning nebula blue/purple background visual element */}
             <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-gradient-to-br from-nebula-blue via-nebula-indigo to-nebula-purple blur-3xl opacity-40 animate-pulse-glow" />
@@ -666,59 +588,6 @@ export default function CelestialSpecials() {
                 </li>
               </ul>
 
-              {/* Interactive Widget inside Moon Card - Stargazing Lens simulator */}
-              <div className="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Telescope className="w-4 h-4 text-nebula-blue" />
-                    <span className="text-xs font-mono uppercase tracking-wider text-starlight/75">Telescope Lens Focus</span>
-                  </div>
-                  {telescopeFocus === 100 || telescopeFocus === 50 || telescopeFocus === 10 ? (
-                    <span className="text-[10px] font-mono text-nebula-blue bg-nebula-blue/10 px-2 py-0.5 rounded-full animate-bounce">
-                      CONSTELLATION ACQUIRED
-                    </span>
-                  ) : (
-                    <span className="text-[10px] font-mono text-starlight/30">
-                      ALIGN LENS
-                    </span>
-                  )}
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-starlight/50">Focus Alignment Wheel</span>
-                    <span className="text-nebula-blue font-bold">{telescopeFocus}% Aligned</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    step="5"
-                    value={telescopeFocus}
-                    onChange={(e) => handleTelescopeFocusChange(Number(e.target.value))}
-                    className="w-full cursor-pointer accent-nebula-blue"
-                    id="telescope-slider"
-                  />
-                  
-                  {/* Dynamic Sky Viewport reflecting lens alignment */}
-                  <div className="relative h-20 rounded-xl bg-slate-950/80 border border-white/5 flex flex-col items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[size:10px_10px]" />
-                    
-                    {activeConstellation ? (
-                      <div className="text-center px-2 relative z-10 animate-[pulse-glow_2s_infinite]">
-                        <Star className="w-4 h-4 text-star-yellow mx-auto mb-1 animate-spin" />
-                        <p className="text-xs font-mono text-starlight font-bold">{activeConstellation}</p>
-                        <p className="text-[9px] font-mono text-nebula-blue uppercase tracking-widest">Perfect Focus Established</p>
-                      </div>
-                    ) : (
-                      <div className="text-center text-starlight/40 px-3 relative z-10">
-                        <p className="text-[10px] font-mono">Lens is blurred. Slide to 10%, 50%, or 100% to resolve alignment.</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
             </div>
           </article>
 
@@ -730,10 +599,10 @@ export default function CelestialSpecials() {
             <Navigation className="w-4 h-4 text-star-yellow animate-pulse" />
             <span>
               {orbitProgress < 38 
-                ? "Active Orbit: Sunrise Ignition is prime. Check out the Stage console." 
-                : orbitProgress <= 75
-                ? "Active Orbit: Solar Zenith/Golden Hour. Press Ignite to fire." 
-                : "Active Orbit: Moon is aligned. Telescope finder is online: slide focus slider to 10%, 50% or 100%!"}
+                ? "Active Orbit: Sunrise Ignition is prime." 
+                : orbitProgress < 75
+                ? "Active Orbit: Solar Zenith/Golden Hour." 
+                : "Active Orbit: Moon is aligned for Eclipse Night."}
             </span>
           </div>
         </div>
