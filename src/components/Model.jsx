@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei';
 
 export function Model(props) {
   // Pulls file directly from the public/ folder route at runtime
-  const { scene } = useGLTF('/model.glb'); 
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}model.glb`); 
   
   return <primitive object={scene} {...props} />;
 }
