@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # IGNITO — Techfest of the Cosmos
 
 A space-themed techfest website built with **React + Vite + Tailwind CSS**.
@@ -90,3 +91,6 @@ This outputs a static `dist/` folder.
   focus ring via Tailwind's default focus styles plus custom `ring-*` states.
 - Custom cursor only replaces the pointer on fine-pointer (mouse/trackpad)
   devices; touch devices keep native touch behavior throughout.
+=======
+# Ignito
+>>>>>>> 8c00195e560baff139b4732e67d1eecc53c3fe9b
