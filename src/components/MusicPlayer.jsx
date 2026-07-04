@@ -41,7 +41,11 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music/theme.mp3" loop />
+      <audio
+        ref={audioRef}
+        src={`${import.meta.env.BASE_URL}music/theme.mp3`}
+        loop
+    />
 
       <button
         onClick={toggleMusic}

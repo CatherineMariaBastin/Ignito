@@ -26,7 +26,7 @@ export default function Contact() {
 
           <div className="flex items-start gap-4">
             <img
-              src="/rocky.jpg"
+              src={`${import.meta.env.BASE_URL}rocky.jpg`}
               alt="Rocky"
               className="w-16 h-16 rounded-full object-cover border border-starlight/10 shadow-[0_0_25px_rgba(57,255,176,0.25)]"
             />

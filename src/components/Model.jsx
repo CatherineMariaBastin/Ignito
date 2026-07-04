@@ -9,4 +9,4 @@ export function Model(props) {
 }
 
 // Pre-load asset memory block to prevent rendering lag
-useGLTF.preload('/model.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}model.glb`);
