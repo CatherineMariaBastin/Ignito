@@ -1,0 +1,78 @@
+// Smaller competitions, each represented as a star of a different
+// classification and colour temperature.
+const competitionsData = [
+  {
+    id: 'sirius',
+    name: 'Sirius Sprint',
+    type: 'Blue-white dwarf · Quiz',
+    format: 'Rapid-fire general tech quiz, 3 rounds, sudden-death finale.',
+    prize: '₹15,000',
+    color: '#cfe6ff',
+    size: 16,
+  },
+  {
+    id: 'betelgeuse',
+    name: 'Betelgeuse Build',
+    type: 'Red supergiant · Hardware',
+    format: 'Open-category hardware build-off judged on ambition and execution.',
+    prize: '₹20,000',
+    color: '#ff8b6b',
+    size: 22,
+  },
+  {
+    id: 'vega',
+    name: 'Vega Verse',
+    type: 'White main-sequence · Gaming',
+    format: 'LAN tournament across three titles, squad and solo brackets.',
+    prize: '₹12,000',
+    color: '#eaf3ff',
+    size: 14,
+  },
+  {
+    id: 'polaris',
+    name: 'Polaris Pathfinder',
+    type: 'Yellow supergiant · Navigation bot',
+    format: 'Line-following and maze-solving bot challenge, precision-timed.',
+    prize: '₹10,000',
+    color: '#ffe9a8',
+    size: 15,
+  },
+  {
+    id: 'antares',
+    name: 'Antares Argument',
+    type: 'Red supergiant · Debate',
+    format: 'Parliamentary-style debate on emerging tech policy questions.',
+    prize: '₹8,000',
+    color: '#ff9d8f',
+    size: 17,
+  },
+  {
+    id: 'rigel',
+    name: 'Rigel Render',
+    type: 'Blue supergiant · Design',
+    format: 'Live UI/UX design challenge against a surprise brief, 3 hours.',
+    prize: '₹10,000',
+    color: '#bcd4ff',
+    size: 18,
+  },
+  {
+    id: 'altair',
+    name: 'Altair Algorithms',
+    type: 'White main-sequence · Coding',
+    format: 'Individual competitive programming round, ICPC-style scoring.',
+    prize: '₹12,000',
+    color: '#f5f8ff',
+    size: 13,
+  },
+  {
+    id: 'proxima',
+    name: 'Proxima Pitch Jr.',
+    type: 'Red dwarf · School outreach',
+    format: 'A gentler pitch round open to high-school teams new to techfests.',
+    prize: '₹5,000',
+    color: '#ff7b7b',
+    size: 11,
+  },
+]
+
+export default competitionsData
