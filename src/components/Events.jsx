@@ -4,7 +4,7 @@ import eventsData from '../data/eventsData'
 
 export default function Events() {
   const ref = useReveal()
-  const [activeId, setActiveId] = useState(eventsData[2].id) // default: Earth
+  const [activeId, setActiveId] = useState(eventsData[2].id) 
   const active = eventsData.find((e) => e.id === activeId)
 
   return (
